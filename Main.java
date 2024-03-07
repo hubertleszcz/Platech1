@@ -4,8 +4,7 @@ import org.example.Mage;
 
 import java.util.*;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+
 public class Main {
     public static void main(String[] args) {
         Set<Mage> mageSet;
@@ -23,6 +22,9 @@ public class Main {
             mageSet = new TreeSet<>(new mageCompare());
             mageMap = new TreeMap<>(new mageCompare());
         }
+
+        //tworzenie danych
+
         Mage firstMainMage = new Mage("Dewastator5000", 16, 22.6, args[0]);
         Mage secondMainMage = new Mage("UltraKoxu12", 14, 15.4, args[0]);
         Mage thirdMainMage = new Mage("Leszcz", 21, 8.5, args[0]);
@@ -35,6 +37,7 @@ public class Main {
         Mage secondSubApprentice = new Mage("Slaby2", 1, 1.1, args[0]);
 
 
+        //dokladanie do zbiorow
         firstApprentice.getApprentices().add(firstSubApprentice);
         firstApprentice.getApprentices().add(secondSubApprentice);
         firstMainMage.getApprentices().add(firstApprentice);
@@ -48,11 +51,13 @@ public class Main {
         mageSet.add(secondMainMage);
         mageSet.add(thirdMainMage);
 
+        //wypisanie rekurencyjne
         for(Mage mage: mageSet){
             mage.recursivePrintOut(0);
         }
 
-        System.out.print("\n\nSTATYSTYKI POTOMKOW\n\n");
+
+
         mageMap.put(firstMainMage, firstMainMage.getApprenticeCount());
         mageMap.put(secondMainMage, secondMainMage.getApprenticeCount());
         mageMap.put(thirdMainMage, thirdMainMage.getApprenticeCount());
@@ -64,8 +69,11 @@ public class Main {
         mageMap.put(firstSubApprentice, firstSubApprentice.getApprenticeCount());
         mageMap.put(secondSubApprentice, secondSubApprentice.getApprenticeCount());
 
-       for(Map.Entry<Mage,Integer> mag: mageMap.entrySet()){
-           System.out.println("Mag: " + mag.getKey() + ", podopieczni: " + mag.getValue());
-       }
+
+        //tworzenie statystyk potomkow
+        System.out.print("\n\nSTATYSTYKI POTOMKOW\n\n");
+        for(Map.Entry<Mage,Integer> mag: mageMap.entrySet()){
+            System.out.println("Mag: " + mag.getKey() + ", podopieczni: " + mag.getValue());
+        }
     }
 }
