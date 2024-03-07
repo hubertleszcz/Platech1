@@ -2,34 +2,51 @@ package org.example;
 
 import java.util.*;
 
-public class Mage implements Comparable{
+public class Mage implements Comparable {
     private final String name;
     private final int level;
     private final double power;
 
+
+
     private Set<Mage> apprentices;
 
-    public String getName(){ return this.name;}
-
-    public int getLevel(){return this.level;};
-
-    public Set<Mage> getApprentices(){
-        return this.apprentices;
-    }
-    public double getPower() {return this.power;}
-
-    public Mage(String name, int level, double power, String setType){
+    public Mage(String name, int level, double power, String setType) {
         this.level = level;
         this.name = name;
         this.power = power;
-        if(setType.equals("0")) this.apprentices = new HashSet<>();
-        else if(setType.equals("1")) this.apprentices = new TreeSet<>();
-        else this.apprentices = new TreeSet<>(new mageCompare());
+        if (setType.equals("0")) {
+            this.apprentices = new HashSet<>();
+        } else if (setType.equals("1")) {
+            this.apprentices = new TreeSet<>();
+        } else {
+            this.apprentices = new TreeSet<>(new mageCompare());
+        }
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    ;
+
+    public Set<Mage> getApprentices() {
+        return this.apprentices;
+    }
+
+    public double getPower() {
+        return this.power;
+    }
+
+
 
     @Override
     public int hashCode() {
-        return (int) ((1601*(this.level << 3) * (this.power * 16))%757);
+        return (int) ((1601 * (this.level << 3) * (this.power * 16)) % 757);
     }
 
     @Override
@@ -40,15 +57,20 @@ public class Mage implements Comparable{
         return level == mage.level && Double.compare(mage.power, power) == 0 && Objects.equals(name, mage.name);
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         String result = "Mage{name='" + this.name + "', level=" +
                 Integer.toString(this.level) + ", power = " + Double.toString(this.power) + " }";
         return result;
     }
 
     @Override
-    public int compareTo(Object obj){
-        return 0;
+     public int compareTo(Object obj){
+        Mage second = (Mage) obj;
+        if(this.getName().compareTo(second.getName()) != 0) return this.getName().compareTo(second.getName());
+        else if(Integer.compare(this.getLevel(), second.getLevel())!=0) return Integer.compare(this.getLevel(), second.getLevel());
+
+        return Double.compare(this.getPower(), second.getPower());
     }
 
     public void recursivePrintOut(int recursionDepth){
@@ -59,5 +81,14 @@ public class Mage implements Comparable{
         for(var mage: this.apprentices){
             mage.recursivePrintOut(recursionDepth+1);
         }
+    }
+
+    public int getApprenticeCount(){
+        int count = 0;
+        for(Mage mage: this.apprentices){
+            count++;
+            if(!mage.apprentices.isEmpty()) count += mage.getApprenticeCount();
+        }
+        return count;
     }
 }
