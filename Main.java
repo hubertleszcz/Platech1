@@ -29,7 +29,7 @@ public class Main {
         Mage firstApprentice = new Mage("Turbosprezarka221", 7, 5.5, args[0]);
         Mage secondApprentice = new Mage("Godzilla404", 6, 4.5, args[0]);
         Mage thirdApprentice = new Mage("SuperCzarodziej123", 9, 3.5, args[0]);
-        Mage forthApprentice = new Mage("SuperCzarodziej1234", 2, 2.0, args[0]);
+        Mage forthApprentice = new Mage("KennyTheReaper2010", 2, 2.0, args[0]);
         Mage fifthApprentice = new Mage("GigaChad15", 100, 100.5, args[0]);
         Mage firstSubApprentice = new Mage("Slaby1", 1, 1.0, args[0]);
         Mage secondSubApprentice = new Mage("Slaby2", 1, 1.1, args[0]);
@@ -52,6 +52,20 @@ public class Main {
             mage.recursivePrintOut(0);
         }
 
-        System.out.print(firstApprentice.getApprenticeCount());
+        System.out.print("\n\nSTATYSTYKI POTOMKOW\n\n");
+        mageMap.put(firstMainMage, firstMainMage.getApprenticeCount());
+        mageMap.put(secondMainMage, secondMainMage.getApprenticeCount());
+        mageMap.put(thirdMainMage, thirdMainMage.getApprenticeCount());
+        mageMap.put(firstApprentice, firstApprentice.getApprenticeCount());
+        mageMap.put(secondApprentice, secondApprentice.getApprenticeCount());
+        mageMap.put(thirdApprentice, thirdApprentice.getApprenticeCount());
+        mageMap.put(forthApprentice, forthApprentice.getApprenticeCount());
+        mageMap.put(fifthApprentice, fifthApprentice.getApprenticeCount());
+        mageMap.put(firstSubApprentice, firstSubApprentice.getApprenticeCount());
+        mageMap.put(secondSubApprentice, secondSubApprentice.getApprenticeCount());
+
+       for(Map.Entry<Mage,Integer> mag: mageMap.entrySet()){
+           System.out.println("Mag: " + mag.getKey() + ", podopieczni: " + mag.getValue());
+       }
     }
 }
